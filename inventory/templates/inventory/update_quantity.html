@@ -1,0 +1,13 @@
+<!-- inventory/templates/inventory/update_quantity.html -->
+{% extends "base.html" %}
+
+{% block title %}Update Quantity{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Update Quantity for {{ material.material_code }} - {{ material.batch_code }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Update Quantity</button>
+</form>
+{% endblock %}

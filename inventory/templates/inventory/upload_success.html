@@ -1,0 +1,44 @@
+<!-- inventory/templates/inventory/upload_success.html -->
+{% extends "base.html" %}
+
+{% block title %}Upload Success{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Upload Successful</h1>
+
+{% if missing_columns %}
+<div class="alert alert-warning">
+    <p>The following required columns were missing and have been added with empty values:</p>
+    <ul>
+        {% for col in missing_columns %}
+        <li>{{ col }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if extra_columns %}
+<div class="alert alert-info">
+    <p>The following extra columns were found:</p>
+    <ul>
+        {% for col in extra_columns %}
+        <li>{{ col }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if warnings %}
+<div class="alert alert-warning">
+    <p>The following warnings occurred:</p>
+    <ul>
+        {% for warning in warnings %}
+        <li>{{ warning }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<p>Excel file processed successfully.</p>
+<a href="{% url 'material_list' %}" class="btn btn-primary">Go to Material List</a>
+{% endblock %}

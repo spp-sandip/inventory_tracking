@@ -1,0 +1,43 @@
+<!-- inventory/templates/inventory/material_detail.html -->
+{% extends "base.html" %}
+
+{% block title %}Material Detail{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Material Detail</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Material Code: {{ material.material_code }}</h5>
+        <p class="card-text"><strong>Batch Code:</strong> {{ material.batch_code }}</p>
+        <p class="card-text"><strong>Description:</strong> {{ material.material_description }}</p>
+        <p class="card-text"><strong>Quantity:</strong> {{ material.quantity }}</p>
+        <p class="card-text"><strong>Value:</strong> {{ material.value }}</p>
+        <p class="card-text"><strong>Storage Location:</strong> {{ material.storage_location }}</p>
+        <p class="card-text"><strong>Department:</strong> {{ material.department }}</p>
+        <p class="card-text"><strong>Batch Date:</strong> {{ material.batch_date }}</p>
+        <p class="card-text"><strong>Party Name:</strong> {{ material.party_name }}</p>
+        <p class="card-text"><strong>Remarks:</strong> {{ material.remarks }}</p>
+        <p class="card-text"><strong>Date of Clearing:</strong> {{ material.date_of_clearing }}</p>
+        <p class="card-text"><strong>Person:</strong> {{ material.person }}</p>
+        <p class="card-text"><strong>Batch Ageing:</strong> {{ material.batch_ageing }}</p>
+        <p class="card-text"><strong>Material Broad Group Description:</strong> {{ material.material_broad_group_desc }}</p>
+        <h2>QR Code</h2>
+        <img src="{% url 'generate_qr_code' material.material_code material.batch_code %}" alt="QR Code" class="img-fluid"><br>
+        <small>QR Code URL: {{ request.scheme }}://{{ request.get_host }}{% url 'material_detail' material.material_code material.batch_code %}</small>
+        <p>
+            <button class="btn btn-secondary btn-sm" onclick="copyToClipboard('{{ request.scheme }}://{{ request.get_host }}{% url 'material_detail' material.material_code material.batch_code %}')">Copy URL</button>
+        </p>
+        <p><a href="{% url 'update_quantity' material.material_code material.batch_code %}" class="btn btn-warning">Update Quantity</a></p>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(url) {
+    navigator.clipboard.writeText(url).then(function() {
+        alert('URL copied to clipboard');
+    }, function(err) {
+        console.error('Could not copy text: ', err);
+    });
+}
+</script>
+{% endblock %}

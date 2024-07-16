@@ -1,0 +1,62 @@
+<!-- inventory/templates/inventory/add_material.html -->
+{% extends "base.html" %}
+
+{% block title %}Add Material{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h1 class="text-center">Add Material</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.material_code.label_tag }}{{ form.material_code }}
+            </div>
+            <div class="form-group">
+                {{ form.storage_location.label_tag }}{{ form.storage_location }}
+            </div>
+            <div class="form-group">
+                {{ form.batch_code.label_tag }}{{ form.batch_code }}
+            </div>
+            <div class="form-group">
+                {{ form.material_description.label_tag }}{{ form.material_description }}
+            </div>
+            <div class="form-group">
+                {% if 'Internal Audit' in user_groups or 'Operations' in user_groups or 'Plant Head' in user_groups %}
+                    {{ form.quantity.label_tag }}{{ form.quantity }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {% if 'Internal Audit' in user_groups or 'Operations' in user_groups or 'Plant Head' in user_groups %}
+                    {{ form.value.label_tag }}{{ form.value }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.department.label_tag }}{{ form.department }}
+            </div>
+            <div class="form-group">
+                {{ form.batch_date.label_tag }}{{ form.batch_date }}
+            </div>
+            <div class="form-group">
+                {{ form.party_name.label_tag }}{{ form.party_name }}
+            </div>
+            <div class="form-group">
+                {{ form.remarks.label_tag }}{{ form.remarks }}
+            </div>
+            <div class="form-group">
+                {{ form.date_of_clearing.label_tag }}{{ form.date_of_clearing }}
+            </div>
+            <div class="form-group">
+                {{ form.person.label_tag }}{{ form.person }}
+            </div>
+            <div class="form-group">
+                {{ form.batch_ageing.label_tag }}{{ form.batch_ageing }}
+            </div>
+            <div class="form-group">
+                {{ form.material_broad_group_desc.label_tag }}{{ form.material_broad_group_desc }}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Save</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
